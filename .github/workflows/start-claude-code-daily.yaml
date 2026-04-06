@@ -2,7 +2,8 @@ name: Daily GLM Coding Plan
 
 on:
   schedule:
-    - cron: '0 7 * * *'      
+    - cron: '30 7 * * *'
+      timezone: 'Asia/Shanghai'
   workflow_dispatch:
 
 jobs:
@@ -12,13 +13,14 @@ jobs:
     env:
       ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
       ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
-      API_TIMEOUT_MS: 600000     # 缩短到 10 分钟，适合极简触发
+      API_TIMEOUT_MS: 600000
 
     permissions:
       contents: write
       pull-requests: write
       issues: write
-      id-token: write 
+      id-token: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
